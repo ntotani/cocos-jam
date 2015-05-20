@@ -1,11 +1,26 @@
 local jam = {}
 local Sprite = cc.Sprite
 
-function Sprite:frameIdx(idx)
-    if not idx then return self.frameIdx_ end
-    self.frameIdx_ = idx % #self.frames_
-    self:setSpriteFrame(self.frames_[self.frameIdx_ + 1])
-    return idx
+function Sprite:frameIdx(...)
+    local params = {...}
+    if #params == 0 then return self.frameIdx_ end
+    if #params == 1 and type(params[1]) == "number" then
+        self.frameIdx_ = params[1] % #self.frames_
+        self:setSpriteFrame(self.frames_[self.frameIdx_ + 1])
+        return self
+    end
+    local time = 0.5
+    if type(params[1]) == "table" then
+        if #params > 1 then time = params[2] end
+        params = params[1]
+    end
+    local frames = {}
+    for _, e in ipairs(params) do
+        frames[#frames + 1] = self.frames_[(e % #self.frames_) + 1]
+    end
+    self:playAnimationForever(display.newAnimation(frames, time))
+    self.frameIdx_ = params
+    return self
 end
 
 function jam.sprite(name, size)
