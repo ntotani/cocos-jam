@@ -1,4 +1,5 @@
-local jam = require("app.jam")
+local jam = require("app.lib.jam")
+local us = require("app.lib.moses")
 
 local MainScene = class("MainScene", cc.load("mvc").ViewBase)
 
