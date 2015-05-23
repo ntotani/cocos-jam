@@ -2,4 +2,5 @@
 cocos2dx template for jam
 
 # lisence
-ぴぽや　http://piposozai.blog76.fc2.com/
+* ぴぽや http://piposozai.blog76.fc2.com/
+* Music is VFR http://musicisvfr.com/
