@@ -39,5 +39,22 @@ function jam.sprite(name, size)
     return ret
 end
 
+local function pauseAll_(node)
+    for _, e in ipairs(node:getChildren()) do
+        pauseAll_(e)
+    end
+    node:pause()
+end
+
+local function finish_(mes)
+    local scene = cc.Director:getInstance():getRunningScene()
+    local l = cc.Label:createWithSystemFont(mes, "Arial", 72):move(display.center):addTo(scene)
+    l:enableShadow()
+    pauseAll_(scene)
+end
+
+jam.over = function() finish_("GameOver") end
+jam.clear = function() finish_("Clear!!") end
+
 return jam
 
