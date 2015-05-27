@@ -56,5 +56,20 @@ end
 jam.over = function() finish_("GameOver") end
 jam.clear = function() finish_("Clear!!") end
 
+function jam.rand()
+    return {x = math.random() * display.width, y = math.random() * display.height}
+end
+
+function jam.countUp()
+    local l = cc.Label:createWithSystemFont("0", "", 24)
+    l:enableShadow()
+    local time = 0
+    l:onUpdate(function(dt)
+        time = time + dt
+        l:setString(time)
+    end)
+    return l
+end
+
 return jam
 
